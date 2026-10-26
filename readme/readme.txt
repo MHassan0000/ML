@@ -1,47 +1,57 @@
 ML LAB: QUICK STEPS
 
-Use Jupyter Notebook, not JupyterLab. The existing notebooks work unchanged.
-Run the commands below in a Windows terminal, not in notebook code cells.
+The lab PC already has Python and Jupyter Notebook. No JupyterLab or virtual
+environment is needed. Use prepared code only if your instructor permits it.
+Run terminal commands in Command Prompt or PowerShell, not notebook code cells.
 
-BEFORE THE EXAM
+WHILE INTERNET IS AVAILABLE
 
-1. Prepare the workspace before internet access is unavailable.
-   Only use prepared code if your instructor permits it.
-   On another machine, clone after these files have been pushed to GitHub:
+1. Download the workspace:
 
    git clone https://github.com/MHassan0000/ML.git
    cd ML
 
-   If you already have this workspace, open a terminal in its root folder.
+   If Git is unavailable, use GitHub > Code > Download ZIP, extract it, and open
+   a terminal inside the extracted folder. If already downloaded, use that folder.
 
-2. Install once, using Python 3.10 or newer. Skip this if everything is provided:
+2. Install dependencies once, before internet is disconnected:
 
-   python -m venv .venv
-   .\.venv\Scripts\python.exe -m pip install notebook numpy pandas "scikit-learn>=1.3,<2" joblib nbconvert
+   python -m pip install -r requirements.txt
 
-3. Start Jupyter Notebook and practise running a notebook:
+   Or install the packages directly instead:
 
-   .\.venv\Scripts\python.exe -m notebook
+   python -m pip install numpy pandas "scikit-learn>=1.3,<2" joblib nbconvert
 
-   Keep the terminal open. If the exam computer provides its own installation,
-   use this command instead:
+   These install the libraries, not JupyterLab. Use Python 3.10 or newer.
+
+3. Start Jupyter Notebook from the workspace root:
 
    jupyter notebook
 
+   Keep this terminal open while working in the browser.
    If Notebook is already open in the browser, no launch command is needed.
-   Do not rely on cloning or installing packages during an offline exam.
+   Run a notebook with the bundled practice data to check installation NOW.
+   If imports fail despite installation, the kernel may use another Python.
+   While still online, run this once in a temporary notebook code cell:
+
+   %pip install numpy pandas "scikit-learn>=1.3,<2" joblib nbconvert
+
+   Restart the kernel afterward and remove that installation cell so it does
+   not run during the offline exam. No downloads should be needed after setup.
 
 DURING THE EXAM
 
 4. Read your allocation: algorithm(s), input columns, target column, and K.
    One algorithm: open its folder's notebook, e.g. decision_tree/decision_tree.ipynb.
    Multiple algorithms: open comparison/comparison.ipynb. Change its classifier
-   imports and classifiers dictionary to your allocation; README.md lists choices.
+   imports and classifiers dictionary to your allocation. Copy the required
+   import and classifier constructor from each assigned algorithm's notebook.
    Keep the general imports for pandas, preprocessing, evaluation, and saving.
+   The comparison notebook starts with decision tree, AdaBoost, and LDA.
 
 5. Put the actual exam CSV in the chosen folder's data subfolder.
    Example: decision_tree/data/patients.csv.
-   The bundled stroke CSVs are artificial practice data, not your exam dataset.
+   For multiple algorithms, use comparison/data/patients.csv.
 
 6. Edit the second code cell. Example for the sample paper:
 
@@ -54,13 +64,16 @@ DURING THE EXAM
    Replace these values with YOUR paper's exact names and allocation.
    Leave CATEGORICAL_COLUMNS empty for the paper's already encoded numbers.
    Text categories are handled automatically. Change CSV_OPTIONS only if needed.
+   The classifier is already selected in each individual algorithm's notebook.
 
 7. Put the two genuinely new instances in data/new_patients.csv.
    Include a header with all selected input names; no target column is needed.
    Use the same units and category codes as training.
    If new instances have not been supplied yet, set NEW_DATA_FILE = None.
 
-8. Select Kernel > Restart & Run All (wording varies by Notebook version).
+8. At the top of the open notebook, click Kernel > Restart & Run All and confirm.
+   It may be called Restart Kernel and Run All Cells in newer versions.
+   If unavailable, use Kernel > Restart, then Cell > Run All or Run > Run All Cells.
    Wait for every cell to finish. No separate training command is needed.
    Check for errors. Each target class needs at least FOLDS examples.
    Do not change the assigned K or algorithm just to bypass an error.
@@ -69,23 +82,21 @@ DURING THE EXAM
    Q1: Shape, first five rows, missing values, class counts.
    Q2: Every fold's accuracy for each assigned algorithm.
    Q3: Confusion matrices from held-out predictions.
-   Q4: Average accuracy; comparison table if multiple algorithms are assigned.
+   Q4: Average accuracy; the comparison notebook ranks the assigned algorithms.
    Q5: Full-data fit, saved/reloaded pipeline, and predictions for the new rows.
 
    The chosen folder's results directory contains best_model.pkl and result CSVs.
    Add your own interpretation wherever the question asks for an explanation.
 
 10. Save the executed notebook with your required registration/name using Ctrl+S.
-    If PDF is required, export HTML from a terminal in the workspace root:
+    If PDF is required, open a SECOND terminal in the workspace root and run:
 
     jupyter nbconvert --to html "decision_tree/FA24-BSE-082.ipynb"
 
-    Replace the path with your saved notebook's actual path. If using the local
-    .venv installation instead of the provided exam environment, run:
-
-    .\.venv\Scripts\python.exe -m nbconvert --to html "decision_tree/FA24-BSE-082.ipynb"
-
+    Replace the path with your saved notebook's actual path.
     Open the HTML in a browser, then Print > Save as PDF. Check the tables.
     Submit exactly the files requested by your instructor.
 
 These notebooks are for tabular classification, not continuous-price regression.
+CSV size is limited by the lab PC's memory and training time, not a fixed row count.
+The bundled stroke CSVs are artificial practice data, not the real exam dataset.
