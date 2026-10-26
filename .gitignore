@@ -8,6 +8,5 @@ venv/
 *.pkl
 *.joblib
 **/data/*.csv
-!*/data/student_pass_prediction.csv
 *.html
 *.pdf
