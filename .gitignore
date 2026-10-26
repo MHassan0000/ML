@@ -8,7 +8,6 @@ venv/
 *.pkl
 *.joblib
 **/data/*.csv
-!data/stroke_practice.csv
-!data/unseen_practice.csv
+!*/data/student_pass_prediction.csv
 *.html
 *.pdf

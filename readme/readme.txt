@@ -30,7 +30,8 @@ WHILE INTERNET IS AVAILABLE
 
    Keep this terminal open while working in the browser.
    If Notebook is already open in the browser, no launch command is needed.
-   Run a notebook with the bundled practice data to check installation NOW.
+   Each algorithm includes its own student CSV. Open its notebook and Run All
+   without editing anything to check installation NOW.
    If imports fail despite installation, the kernel may use another Python.
    While still online, run this once in a temporary notebook code cell:
 
@@ -52,24 +53,41 @@ DURING THE EXAM
 5. Put the actual exam CSV in the chosen folder's data subfolder.
    Example: decision_tree/data/patients.csv.
    For multiple algorithms, use comparison/data/patients.csv.
+   There is NO shared data folder at the project root. Each algorithm is separate:
 
-6. Edit the second code cell. Example for the sample paper:
+   logistic_regression/
+       logistic_regression.ipynb
+       data/student_pass_prediction.csv
+       results/
 
-   CSV_FILE = "data/patients.csv"
-   TARGET = "stroke"
-   FEATURES = ["age", "heart_disease", "bmi", "smoking_status"]
+6. Edit the second code cell for your actual exam data.
+   These defaults already work with the included student CSV:
+
+   CSV_FILE = "data/student_pass_prediction.csv"
+   TARGET = "passed"
+   FEATURES = ["study_hours_per_day", "attendance_percent", "previous_exam_score",
+               "assignments_completed_percent", "sleep_hours_per_night"]
    FOLDS = 10
-   NEW_DATA_FILE = "data/new_patients.csv"
+   NEW_DATA_FILE = None
 
    Replace these values with YOUR paper's exact names and allocation.
-   Leave CATEGORICAL_COLUMNS empty for the paper's already encoded numbers.
+   Leave CATEGORICAL_COLUMNS empty for numeric data already encoded by the paper.
    Text categories are handled automatically. Change CSV_OPTIONS only if needed.
    The classifier is already selected in each individual algorithm's notebook.
 
-7. Put the two genuinely new instances in data/new_patients.csv.
+   Use "data/your_filename.csv" consistently. Do NOT add "../".
+   Start Jupyter in the project root or inside the chosen algorithm folder.
+   The notebook prints the exact file path it reads. Check the .csv filename.
+
+7. When given new instances, put them in the SAME algorithm's data folder.
+   Example: logistic_regression/data/new_students.csv. Then set:
+
+   NEW_DATA_FILE = "data/new_students.csv"
+
    Include a header with all selected input names; no target column is needed.
    Use the same units and category codes as training.
    If new instances have not been supplied yet, set NEW_DATA_FILE = None.
+   A file error after training can come from NEW_DATA_FILE, not CSV_FILE.
 
 8. At the top of the open notebook, click Kernel > Restart & Run All and confirm.
    It may be called Restart Kernel and Run All Cells in newer versions.
@@ -99,4 +117,5 @@ DURING THE EXAM
 
 These notebooks are for tabular classification, not continuous-price regression.
 CSV size is limited by the lab PC's memory and training time, not a fixed row count.
-The bundled stroke CSVs are artificial practice data, not the real exam dataset.
+The student CSV is included in every algorithm's own data folder for testing.
+Each folder works without the other algorithm folders. No shared dataset is needed.
