@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+**/results/*
+!**/results/.gitkeep
+*.pkl
+*.joblib
+**/data/*.csv
+!data/stroke_practice.csv
+!data/unseen_practice.csv
+*.html
+*.pdf
